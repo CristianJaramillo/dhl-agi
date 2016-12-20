@@ -1,0 +1,24 @@
+{
+    "name": "cristianjaramillo/hdl",
+    "description": "Applicación para confirmación de llamadas ",
+    "keywords": ["agi", "asterisk", "oci"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cristian Jaramillo",
+            "email": "cristian_gerar@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DHL\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
