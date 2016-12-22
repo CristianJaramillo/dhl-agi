@@ -19,3 +19,7 @@ $application = new DHL\Application();
 $application->delivery();
 
 $application->close();
+
+exit();
+
+?>
