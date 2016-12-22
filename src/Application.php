@@ -2,35 +2,32 @@
 
 namespace DHL;
 
+use DHL\Asterisk\{AGI, AGI_AsteriskManager};
+
 /**
  * 
  */
 class Application
 {
-
 	/**
 	 *
 	 * @var Connection Oracle DB
 	 */
 	private $connection;
-
 	/**
 	 *
 	 *
 	 * @var DHL\Asterisk\AGI
 	 */
 	private $agi;
-
-
 	/**
 	 *
 	 *
 	 */
 	public function __construct()
 	{
-
+		$this->agi = new AGI();
 		$database = (object) include 'database.php';
-
 		/**
 		 |
 		 | Creamos la conexión
@@ -41,31 +38,27 @@ class Application
 				$database->password, 
 				build_connection_string($database)
 			);
-
 		/**
 		 |
 		 | Validamos la connexión
 		 |
 		 */
 		if (!$this->connection) {
-			$message_error = oci_error();
-			print_r($message_error['message']);
-			exit;
+		   $message_error = oci_error();
+		   $this->agi->verbose($message_error['message']);
+		   exit;
 		} else {
-			print_r("Connected to Oracle!");
+			$this->agi->verbose("Connected to Oracle!");
 		}
-
 	}
-
 	/**
 	 * 
 	 * 
 	 */
 	public function delivery()
 	{
-		print_r("test");
+		$this->agi->verbose(print_r($this->agi, true));
 	}
-
 	/**
 	 *
 	 * 
@@ -79,5 +72,4 @@ class Application
 		 */
 		oci_close($this->connection);
 	}
-
 }
