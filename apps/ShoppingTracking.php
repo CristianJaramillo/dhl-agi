@@ -15,12 +15,8 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-$application = new DHL\Application();
+$app = new DHL\ShoppingTracking();
 
-$application->delivery();
+$app->action();
 
-$application->close();
-
-exit();
-
-?>
+$app->close();

@@ -7,19 +7,22 @@ use DHL\Asterisk\{AGI, AGI_AsteriskManager};
 /**
  * 
  */
-class Application
+abstract class Application
 {
+	
 	/**
 	 *
 	 * @var Connection Oracle DB
 	 */
-	private $connection;
+	protected $connection;
+	
 	/**
 	 *
 	 *
 	 * @var DHL\Asterisk\AGI
 	 */
-	private $agi;
+	protected $agi;
+
 	/**
 	 *
 	 *
@@ -48,17 +51,12 @@ class Application
 		   $this->agi->verbose($message_error['message']);
 		   exit;
 		} else {
-			$this->agi->verbose("Connected to Oracle!");
+			$this->agi->verbose("Connected to Oracle!\n");
 		}
 	}
-	/**
-	 * 
-	 * 
-	 */
-	public function delivery()
-	{
-		$this->agi->verbose(print_r($this->agi, true));
-	}
+
+	public abstract function acction();
+
 	/**
 	 *
 	 * 
@@ -72,4 +70,5 @@ class Application
 		 */
 		oci_close($this->connection);
 	}
+
 }
