@@ -33,8 +33,8 @@ class Application
 	 */
 	public function delivery()
 	{
-		$this->agi->verbose(print_r($fastagi, true));
+		$this->agi->verbose('verbose', 0);
+		$this->agi->verbose(print_r($this->agi, true));
 	}
 
 }
-
