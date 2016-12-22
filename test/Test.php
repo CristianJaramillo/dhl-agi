@@ -17,3 +17,5 @@ require __DIR__.'/../vendor/autoload.php';
 $application = new DHL\Application();
 
 $application->delivery();
+
+$application->close();
