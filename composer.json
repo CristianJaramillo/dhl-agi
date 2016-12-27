@@ -15,11 +15,9 @@
     },
     "autoload": {
         "psr-4": {
-            "DHL\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+            "App\\": "app/",
+            "Asterisk\\": "asterisk/"
+        }
     },
     "minimum-stability": "dev"
 }

@@ -12,8 +12,6 @@ $connectionParams = require __DIR__ . "/../config/database.php";
 
 $conn = DriverManager::getConnection($connectionParams, $config);
 
-// echo (new \DateTime('now'))->format('Y-M-D');
-
 $conn->delete('DIL_PHONE_REGISTRO_PEDIDO', array('REG_ID' => 1));
 
 $conn->insert('DIL_PHONE_REGISTRO_PEDIDO', [

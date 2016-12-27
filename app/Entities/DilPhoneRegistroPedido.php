@@ -1,6 +1,6 @@
 <?php 
 
-namespace DHL\Entities;
+namespace App\Entities;
 
 /**
  * @Entity @Table(name="DIL_PHONE_REGISTRO_PEDIDO")

@@ -1,6 +1,6 @@
 <?php
 
-namespace DHL\Asterisk;
+namespace Asterisk;
 
 /**
 * phpagi.php : PHP AGI Functions for Asterisk
@@ -779,7 +779,7 @@ class AGI
     * @param integer $level from 1 to 4
     * @return array, see evaluate for return information.
     */
-    function verbose($message, $level=0)
+    function verbose($message, $level=1)
     {
         foreach(explode("\n", str_replace("\r\n", "\n", print_r($message, true))) as $msg)
         {

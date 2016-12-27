@@ -1,10 +1,9 @@
 <?php
 
-namespace DHL;
+namespace App;
 
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
-use DHL\Asterisk\AGI;
 
 /**
  *
@@ -18,13 +17,6 @@ abstract class Application
 	 * @var \Doctrine\DBAL\Connection
 	 */
 	protected $connection;
-	
-	/**
-	 *
-	 *
-	 * @var DHL\Asterisk\AGI
-	 */
-	protected $agi;
 
 	/**
 	 *
@@ -32,13 +24,9 @@ abstract class Application
 	 */
 	public function __construct()
 	{
-
-		$this->agi = new AGI();
-
-		$this->agi->verbose("Recuperando configuración");
+		echo "EXEC Verbose(1,\"Cargando configuraciones.\")\n";
 		$connectionParams = require __DIR__ . "/../config/database.php";
-
-		$this->agi->verbose("Creando conexión a " + $connectionParams['dbname']);
+		echo "EXEC Verbose(1,\"Creando conexion.\")\n";
 		$this->connection = DriverManager::getConnection($connectionParams, new Configuration());
 	}
 
@@ -54,7 +42,7 @@ abstract class Application
 	 */
 	public function close()
 	{
-		$this->verbose("Cerrando la conexión");
+		echo "EXEC Verbose(1,\"Cerrando conexion.\")\n";
 		$this->connection->close();
 	}
 

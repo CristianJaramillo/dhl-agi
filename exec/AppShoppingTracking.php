@@ -15,10 +15,10 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-$app = new DHL\ShoppingTracking();
+use App\ShoppingTracking;
+
+$app = new ShoppingTracking();
 
 $app->action();
 
 $app->close();
-
-exit;

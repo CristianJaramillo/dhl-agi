@@ -1,6 +1,6 @@
 <?php 
 
-namespace DHL\Asterisk;
+namespace Asterisk;
 
  /**
   * phpagi-asmanager.php : PHP Asterisk Manager functions
