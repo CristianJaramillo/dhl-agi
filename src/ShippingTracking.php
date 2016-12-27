@@ -39,9 +39,12 @@ final class ShoppingTracking extends Application
 		$this->agi->verbose("Ejecutamos la consulta.\n");
 		$results = $this->connection->fetchAll($this->query, [$noReferencia]);
 		
-		$this->agi->verbose("Comprobando existencia");
+		$this->agi->verbose("Comprobando existencia.\n");
 
-		print_r($results);
+		echo "SUCCESS";
+
+		$this->agi->set_variable("SUCCESS","true");
+
 	}
 	
 }
