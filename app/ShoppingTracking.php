@@ -21,9 +21,9 @@ class ShoppingTracking extends Application
 	public function action()
 	{
 		$this->agi->verbose("Recuperamos NO_REFERENCIA");
-		$noReferencia = $this->agi->get_variable($this->noReferencia);
+		$noReferencia = $this->agi->get_variable("NO_REFERENCIA");
 
-		$this->agi->verbose("Ha ingresado la referencia {$noReferencia}");
+		$this->agi->verbose("Ha ingresado la referencia $this->noReferencia");
 
 		$this->agi->verbose("Preparando consulta");
 		$stmt = $this->connection->prepare($this->sql);
@@ -34,10 +34,20 @@ class ShoppingTracking extends Application
 		$this->agi->verbose("Ejecutando consulta");
 		$stmt->execute();
 
-		$this->agi->verbose("Comprobando existencia.\n");
-		$this->agi->set_variable("SUCCESS","true");
+		$this->agi->verbose("Comprobando existencia");
+		
+		$rows = $stmt->fetchAll();
 
-		print_r($stmt->fetchAll());
+		if(count($rows) > 0)
+		{
+		
+			$this->agi->set_variable("SUCCESS","true");
+
+			foreach ($rows as $row) {
+				$this->agi->set_variable("NOMBRE_ESTADO_REFERENCIA", $row['NOMBRE_ESTADO_REFERENCIA']);
+			}
+		}
+
 
 	}
 	
