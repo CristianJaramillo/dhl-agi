@@ -2,17 +2,20 @@
 
 namespace DHL;
 
-use DHL\Asterisk\{AGI, AGI_AsteriskManager};
+use Doctrine\DBAL\Configuration;
+use Doctrine\DBAL\DriverManager;
+use DHL\Asterisk\AGI;
 
 /**
- * 
+ *
+ * @author Cristian Jaramillo (cristian_gerar@hotmail.com)
  */
 abstract class Application
 {
 	
 	/**
 	 *
-	 * @var Connection Oracle DB
+	 * @var \Doctrine\DBAL\Connection
 	 */
 	protected $connection;
 	
@@ -29,33 +32,21 @@ abstract class Application
 	 */
 	public function __construct()
 	{
+
 		$this->agi = new AGI();
-		$database = (object) include 'database.php';
-		/**
-		 |
-		 | Creamos la conexión
-		 |
-		*/
-		$this->connection = oci_connect(
-				$database->username, 
-				$database->password, 
-				build_connection_string($database)
-			);
-		/**
-		 |
-		 | Validamos la connexión
-		 |
-		 */
-		if (!$this->connection) {
-		   $message_error = oci_error();
-		   $this->agi->verbose($message_error['message']);
-		   exit;
-		} else {
-			$this->agi->verbose("Connected to Oracle!\n");
-		}
+
+		$this->agi->verbose("Recuperando configuración");
+		$connectionParams = require __DIR__ . "/../config/database.php";
+
+		$this->agi->verbose("Creando conexión a " + $connectionParams['dbname']);
+		$this->connection = DriverManager::getConnection($connectionParams, new Configuration());
 	}
 
-	public abstract function acction();
+	/**
+	 *
+	 *
+	 */
+	public abstract function action();
 
 	/**
 	 *
@@ -63,12 +54,8 @@ abstract class Application
 	 */
 	public function close()
 	{
-		/**
-		 |
-		 | Close the Oracle connection
-		 |
-		 */
-		oci_close($this->connection);
+		$this->verbose("Cerrando la conexión");
+		$this->connection->close();
 	}
 
 }

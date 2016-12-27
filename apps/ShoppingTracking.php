@@ -20,3 +20,5 @@ $app = new DHL\ShoppingTracking();
 $app->action();
 
 $app->close();
+
+exit;

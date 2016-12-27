@@ -5,20 +5,20 @@ namespace DHL;
 /**
  * 
  */
-class ShippingTracking extends Application
+final class ShoppingTracking extends Application
 {
 
 	/**
 	 *
-	 * @var
+	 * @var string
 	 */
-	private $table = "DIL_PHONE_REGISTRO_PEDIDO";
+	private $query = "SELECT * FROM DIL_PHONE_REGISTRO_PEDIDO WHERE NO_REFERENCIA = ?";
 
 	/**
 	 *
-	 * @var
+	 * @var string
 	 */
-	private $reference_number;
+	private $noReferencia = 'NO_REFERENCIA';
 
 	/**
 	 *
@@ -26,9 +26,6 @@ class ShippingTracking extends Application
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->reference_number = $this->agi->get_variable("PIN");
-
 	}
 
 	/**
@@ -36,7 +33,15 @@ class ShippingTracking extends Application
 	 */	
 	public function action()
 	{
-		$this->agi->verbose("Reference Number {$this->reference_number}\n");
+		$this->agi->verbose("Recuperamos NO_REFERENCIA.\n");
+		$noReferencia = $this->agi->get_variable($this->noReferencia);
+		
+		$this->agi->verbose("Ejecutamos la consulta.\n");
+		$results = $this->connection->fetchAll($this->query, [$noReferencia]);
+		
+		$this->agi->verbose("Comprobando existencia");
+
+		print_r($results);
 	}
 	
 }
