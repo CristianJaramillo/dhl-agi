@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Asterisk\AGI;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 
@@ -20,13 +21,23 @@ abstract class Application
 
 	/**
 	 *
+	 * @var \Asterisk\AGI
+	 */
+	protected $agi;
+
+	/**
+	 *
 	 *
 	 */
 	public function __construct()
 	{
-		echo "EXEC Verbose(1,\"Cargando configuraciones.\")\n";
+
+		$this->agi = new AGI();
+		
+		$this->agi->verbose("Cargando configuraciones");
 		$connectionParams = require __DIR__ . "/../config/database.php";
-		echo "EXEC Verbose(1,\"Creando conexion.\")\n";
+		
+		$this->agi->verbose("Creando conexion");
 		$this->connection = DriverManager::getConnection($connectionParams, new Configuration());
 	}
 
@@ -42,7 +53,7 @@ abstract class Application
 	 */
 	public function close()
 	{
-		echo "EXEC Verbose(1,\"Cerrando conexion.\")\n";
+		$this->agi->verbose("Cerrando conexion");
 		$this->connection->close();
 	}
 

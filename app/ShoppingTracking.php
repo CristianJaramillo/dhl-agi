@@ -20,29 +20,22 @@ class ShoppingTracking extends Application
 	 */	
 	public function action()
 	{
-		echo "EXEC Verbose(1,\"Recuperamos NO_REFERENCIA.\")\n";
-		// $this->agi->verbose("Recuperamos NO_REFERENCIA.\n");
-		// $noReferencia = $this->agi->get_variable($this->noReferencia);
-		$noReferencia = "1234";
+		$this->agi->verbose("Recuperamos NO_REFERENCIA");
+		$noReferencia = $this->agi->get_variable($this->noReferencia);
 
-		// $this->agi->verbose("Ejecutamos la consulta.\n");
-		// $results = $this->connection->fetchAll($this->query, 
-		// 		[$noReferencia]
-		// 	);
+		$this->agi->verbose("Ha ingresado la referencia {$noReferencia}");
 
-		echo "EXEC Verbose(1,\"Preparando consulta.\")\n";
+		$this->agi->verbose("Preparando consulta");
 		$stmt = $this->connection->prepare($this->sql);
-		echo "EXEC Verbose(1,\"Agregando NO_REFERENCIA.\")\n";
+
+		$this->agi->verbose("Agregando NO_REFERENCIA");
 		$stmt->bindValue("noReferencia", $noReferencia);
-		echo "EXEC Verbose(1,\"Ejecutando consulta.\")\n";
+
+		$this->agi->verbose("Ejecutando consulta");
 		$stmt->execute();
 
-		// $this->agi->verbose("Comprobando existencia.\n");
-
-		// echo "SUCCESS";
-
-		// $this->agi->set_variable("SUCCESS","true");
-		// print_r($results);
+		$this->agi->verbose("Comprobando existencia.\n");
+		$this->agi->set_variable("SUCCESS","true");
 
 		print_r($stmt->fetchAll());
 
