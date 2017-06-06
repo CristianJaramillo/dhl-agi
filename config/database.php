@@ -7,42 +7,42 @@ return [
      | 
      |
      */
-    'driver' => 'pdo_oci',
+    'driver' => 'pdo_mysql',
 
 	/**
 	 |
 	 | Username to use when connecting to the database.
 	 |
 	 */
-	'user' => 'cm_001',
+	'user' => 'root',
 	
 	/**
 	 |
 	 | Password to use when connecting to the database.
 	 |
 	 */
-	'password' => 'hAfaPHa7unAc',
+	'password' => 'Tesseract454_',
 	
 	/**
 	 |
 	 | Hostname of the database to connect to.
 	 |
 	 */
-	'host' => '138.128.190.226',
+	'host' => 'localhost',
 
 	/**
 	 |
 	 | Port of the database to connect to.
 	 |
 	 */
-	'port' => 1521,
+	'port' => 3306,
 
 	/**
 	 |
 	 | Name of the database/schema to connect to.
 	 |
 	 */
-	'dbname' => 'orclt',
+	'dbname' => 'dhl',
 
 	/**
 	 |

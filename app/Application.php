@@ -32,12 +32,12 @@ abstract class Application
 	public function __construct()
 	{
 
-		$this->agi = new AGI();
+		// $this->agi = new AGI();
 		
-		$this->agi->verbose("Cargando configuraciones");
+		// $this->agi->verbose("Cargando configuraciones");
 		$connectionParams = require __DIR__ . "/../config/database.php";
 		
-		$this->agi->verbose("Creando conexion");
+		// $this->agi->verbose("Creando conexion");
 		$this->connection = DriverManager::getConnection($connectionParams, new Configuration());
 	}
 
@@ -53,7 +53,7 @@ abstract class Application
 	 */
 	public function close()
 	{
-		$this->agi->verbose("Cerrando conexion");
+		// $this->agi->verbose("Cerrando conexion");
 		$this->connection->close();
 	}
 
