@@ -13,11 +13,11 @@
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-use App\ShoppingTracking;
+use App\LoginDeliveryPerson;
 
-$app = new ShoppingTracking();
+$app = new LoginDeliveryPerson();
 
 $app->action();
 

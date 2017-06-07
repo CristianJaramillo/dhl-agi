@@ -12,7 +12,7 @@ class DeliveryStatus extends Application
 	 *
 	 * @var string
 	 */
-	private $sql = "SELECT * FROM deliveries WHERE id = :DELIVERY_ID";
+	private $sql = "SELECT * FROM deliveries WHERE id = :DELIVERY_ID LIMIT 1";
 
 	/**
 	 *
@@ -26,7 +26,7 @@ class DeliveryStatus extends Application
 
 		if($deliveryId->code == 200)
 		{
-			$this->agi->verbose("DELIVERY ID => " . $deliveryId->data);
+			$this->agi->verbose("ENTER => " . $deliveryId->data);
 
 			$this->agi->verbose("PREPARE QUERY...");
 			$stmt = $this->connection->prepare($this->sql);

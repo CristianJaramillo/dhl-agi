@@ -21,32 +21,35 @@ class LoginDeliveryPerson extends Application
 	public function action()
 	{
 
-		$this->agi->verbose("Recuperamos DELIVERY_PERSON_ID");
+		$this->agi->verbose("GET DELIVERY PERSON ID");
 		$deliveryPersonId = (object) $this->agi->get_variable("DELIVERY_PERSON_ID");
 
 		if($deliveryPersonId->code == 200)
 		{
-			$this->agi->verbose("Ha ingresado la referencia $deliveryPersonId->data");
+			$this->agi->verbose("ENTER => " . $deliveryPersonId->data);
 
-			$this->agi->verbose("Preparando consulta");
+			$this->agi->verbose("PREPARE QUERY...");
 			$stmt = $this->connection->prepare($this->sql);
 
-			$this->agi->verbose("Agregando DELIVERY_PERSON_ID");
+			$this->agi->verbose("ADD DELIVERY PERSON ID");
 			$stmt->bindValue("DELIVERY_PERSON_ID", $deliveryPersonId->data, \PDO::PARAM_INT);
 
-			$this->agi->verbose("Ejecutando consulta");
+			$this->agi->verbose("EXECUTE QUERY...");
 			$stmt->execute();
 
-			$this->agi->verbose("Comprobando existencia");
-			
+			$this->agi->verbose("RESULT INTO ARRAY");
 			$rows = $stmt->fetchAll();
 			
+			$exists = "FALSE";
+
 			if(count($rows) > 0)
 			{
-				$this->agi->set_variable("LOGIN","true");
-			} else {
-				$this->agi->set_variable("LOGIN","false");
+				$exists = "TRUE";
+				$this->agi->set_variable("PASSWORD", $rows[0]['password']);
 			}
+
+			$this->agi->set_variable("EXISTS", $exists);
+
 		}
 
 	}
