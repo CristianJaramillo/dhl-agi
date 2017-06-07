@@ -21,55 +21,35 @@ class DeliveryStatus extends Application
 	public function action()
 	{
 
-		/*$stmt = $this->connection->prepare($this->sql);
-		
-		$stmt->bindValue("DELIVERY_ID", 4, \PDO::PARAM_INT);
-
-		$stmt->execute();
-		
-		$rows = $stmt->fetchAll();
-		
-		if(count($rows) > 0)
-		{
-			foreach ($rows as $row) {
-				echo $row['status'] . "\n";
-			}
-
-		} else {
-			echo "INVALID" . "\n";
-		}*/
-
-		$this->agi->verbose("Recuperamos DELIVERY_ID");
+		$this->agi->verbose("GET DELIVERY ID");
 		$deliveryId = (object) $this->agi->get_variable("DELIVERY_ID");
 
 		if($deliveryId->code == 200)
 		{
-			$this->agi->verbose("Ha ingresado la referencia $deliveryId->data");
+			$this->agi->verbose("DELIVERY ID => " . $deliveryId->data);
 
-			$this->agi->verbose("Preparando consulta");
+			$this->agi->verbose("PREPARE QUERY...");
 			$stmt = $this->connection->prepare($this->sql);
 
-			$this->agi->verbose("Agregando DELIVERY_ID");
+			$this->agi->verbose("ADD DELIVERY ID");
 			$stmt->bindValue("DELIVERY_ID", $deliveryId->data, \PDO::PARAM_INT);
 
-			$this->agi->verbose("Ejecutando consulta");
+			$this->agi->verbose("EXECUTE QUERY...");
 			$stmt->execute();
 
-			$this->agi->verbose("Comprobando existencia");
-			
+			$this->agi->verbose("RESULT INTO ARRAY");
 			$rows = $stmt->fetchAll();
 			
+			$status = "INVALID";
+
 			if(count($rows) > 0)
 			{
-				$this->agi->set_variable("STATUS", "INVALID");
-
-				foreach ($rows as $row) {
-					$this->agi->set_variable("STATUS", $row['status']);
-				}
-
-			} else {
-				$this->agi->set_variable("STATUS","INVALID");
+				$status = $rows[0]['status'];
 			}
+
+			$this->agi->set_variable("STATUS", $status);
+
+			$this->agi->verbose("STATUS => " . $status);
 		}
 
 	}
