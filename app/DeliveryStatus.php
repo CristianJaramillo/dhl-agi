@@ -47,7 +47,7 @@ class DeliveryStatus extends Application
 				$status = $rows[0]['status'];
 			}
 
-			$this->agi->set_variable("STATUS", $status);
+			$this->agi->set_variable("STATUS", strtolower($status));
 
 			$this->agi->verbose("STATUS => " . $status);
 		}
